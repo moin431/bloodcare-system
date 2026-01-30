@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | BloodCare</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<section class="auth-section d-flex">
+
+    <!-- LEFT -->
+    <div class="auth-left col-md-6 d-none d-md-flex flex-column
+              justify-content-center align-items-center text-center p-5">
+        <h2 class="fw-bold mb-3">Donate Blood, Save Lives</h2>
+        <p class="mb-4">Join our life-saving community today</p>
+        <img src=https://cdn.apollohospitals.com/cancer-centre/2024/05/blood-donation.jpg class="rounded center mt-3" alt="Blood Donation">
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+
+        <!-- LOGIN FORM -->
+        <form th:action="@{login}" method="post" class="card p-4 form-card" id="loginForm">
+            <h4 class="text-center fw-bold text-danger mb-3">Login</h4>
+
+            <input name="email" type="email" class="form-control mb-3" placeholder="Email">
+            <input name="password" type="password" class="form-control mb-3" placeholder="Password">
+
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <input type="checkbox"> Remember me
+                </div>
+                <small class="text-muted">Forgot?</small>
+            </div>
+
+            <button class="btn btn-main w-100 mb-3">Login</button>
+
+            <p class="text-center mb-0">
+                Don’t have an account?
+                <a href="/registration" >Register</a>
+            </p>
+        </form>
+
+    </div>
+</section>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

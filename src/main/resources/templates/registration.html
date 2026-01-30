@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration | BloodCare</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<section class="auth-section d-flex">
+
+  <!-- LEFT -->
+  <div class="auth-left col-md-6 d-none d-md-flex flex-column
+              justify-content-center align-items-center text-center p-5">
+    <h2 class="fw-bold mb-3">Donate Blood, Save Lives</h2>
+    <p class="mb-4">Join our life-saving community today</p>
+    <img src=https://cdn.apollohospitals.com/cancer-centre/2024/05/blood-donation.jpg class="rounded center mt-3" alt="Blood Donation">
+  </div>
+
+  <!-- RIGHT -->
+  <div class="col-md-6 d-flex justify-content-center align-items-center">
+
+    <!-- REGISTER FORM -->
+    <div class="card p-4 form-card " id="registerForm">
+      <h4 class="text-center fw-bold text-danger mb-3">Register</h4>
+      <form th:action="@{registration}" th:object="${user}" method="post"  >
+        <input th:field="*{name}" class="form-control mb-2" placeholder="Full Name">
+        <input th:field="*{email}" type="email" class="form-control mb-2" placeholder="Email">
+        <input th:field="*{phoneNumber}" class="form-control mb-2" placeholder="Phone">
+
+        <select th:field="*{bloodGroup}"  class="form-control mb-2">
+          <option value="" >Blood Group</option>
+          <option th:value="APOS">A+</option><option th:value="ANEG">A-</option>
+          <option th:value="BPOS">B+</option><option th:value="BNEG">B-</option>
+          <option th:value="OPOS">O+</option><option th:value="ONEG">O-</option>
+          <option th:value="ABPOS">AB+</option><option th:value="ABNEG">AB-</option>
+        </select>
+
+        <input th:field="*{password}" type="password" class="form-control mb-2" placeholder="Password">
+
+        <select th:field="*{role}" class="form-control mb-3">
+          <option value="">Role</option>
+          <option th:value="DONOR">Donor</option>
+          <option th:value="RECEIVER">Receiver</option>
+        </select>
+
+         <button type="submit" class="btn btn-main w-100 mb-3">Create Account</button>
+      </form>
+
+        <p class="text-center mb-0">
+          Already have an account?
+          <a href="/login" >Login</a>
+        </p>
+    </div>
+
+
+  </div>
+</section>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Request Status | BloodCare</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="dashboard d-flex">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar p-4">
+        <a class="navbar-brand d-flex align-items-center " href="#">
+            <img src="https://www.octapharmaplasma.com/wp-content/uploads/2025/03/Plasma-vs-platelets-1.png" class="rounded" alt="BloodCare Logo">
+            <span class="ms-2 fw-bold text-danger logo-text">BloodCare</span>
+        </a>
+        <a href="/receiver-dashboard">Dashboard</a>
+        <a href="/blood-request">Request Blood</a>
+        <a class="active">Request Status</a>
+        <a href="/logout" class="mt-4 text-white border white">Logout</a>
+    </div>
+
+    <!-- MAIN -->
+    <div class="flex-grow-1 p-4">
+
+        <h3 class="fw-bold mb-4">My Blood Requests</h3>
+
+        <div class="table-card">
+
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th>Blood Group</th>
+                    <th>Units</th>
+                    <th>Hospital</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="req : ${Requests}">
+                    <td th:text="${req.bloodGroup}"></td>
+                    <td th:text="${req.units}"></td>
+                    <td th:text="${req.requesterName}"></td>
+                    <td>
+              <span th:text="${req.status}"
+                    th:classappend="
+                ${req.status == 'APPROVED'} ? 'badge badge-approved' :
+                (${req.status == 'REJECTED'} ? 'badge badge-rejected' :
+                 'badge badge-pending')">
+              </span>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

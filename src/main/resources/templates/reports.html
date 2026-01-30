@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Reports & Analytics | BloodCare</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="dashboard d-flex">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar p-4">
+        <a class="navbar-brand d-flex align-items-center " href="#">
+            <img src="https://www.octapharmaplasma.com/wp-content/uploads/2025/03/Plasma-vs-platelets-1.png" class="rounded" alt="BloodCare Logo">
+            <span class="ms-2 fw-bold text-danger logo-text">BloodCare</span>
+        </a>
+        <a href="/admin-dashboard">Dashboard</a>
+        <a class="active">Reports</a>
+        <a href="/logout" class="mt-4 text-white border white">Logout</a>
+    </div>
+
+    <!-- MAIN -->
+    <div class="flex-grow-1 p-4">
+
+        <h3 class="fw-bold mb-4">Reports & Analytics</h3>
+
+        <!-- KPI -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="report-card">
+                    <p>Total Donations</p>
+                    <div class="kpi">1,420</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="report-card">
+                    <p>Requests Fulfilled</p>
+                    <div class="kpi">1,180</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="report-card">
+                    <p>Critical Requests</p>
+                    <div class="kpi">42</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="report-card">
+                    <p>Active Donors</p>
+                    <div class="kpi">860</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="report-card">
+                    <h6 class="fw-bold mb-3">Monthly Donations</h6>
+                    <canvas id="donationChart"></canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="report-card">
+                    <h6 class="fw-bold mb-3">Blood Group Distribution</h6>
+                    <canvas id="groupChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    new Chart(document.getElementById('donationChart'),{
+        type:'line',
+        data:{
+            labels:['Jan','Feb','Mar','Apr','May','Jun'],
+            datasets:[{
+                data:[120,150,180,160,200,220],
+                borderColor:'#dc2626',
+                fill:false
+            }]
+        }
+    });
+
+    new Chart(document.getElementById('groupChart'),{
+        type:'doughnut',
+        data:{
+            labels:['O+','O-','A+','B+','AB+'],
+            datasets:[{
+                data:[35,10,25,20,10],
+                backgroundColor:[
+                    '#dc2626','#991b1b','#ef4444','#f87171','#fecaca'
+                ]
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>
