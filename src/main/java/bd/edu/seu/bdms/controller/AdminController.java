@@ -30,7 +30,7 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("home")
+    @GetMapping("/")
     public String home(){
         return "home";
     }
