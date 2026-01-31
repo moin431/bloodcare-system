@@ -71,12 +71,10 @@
             <input th:field="*{requiredDate}" type="date" class="form-control mt-1">
           </div>
         </div>
-        <div class="col-md-6 d-flex align-items-center mt-4">
-          <input type="checkbox"
-                 th:field="*{emergency}"
-                 class="form-check-input me-2">
-          <label class="label-strong mb-0">
-            Emergency Request
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="checkbox" th:field="*{emergency}">
+          <label class="form-check-label text-danger fw-bold">
+            🚨 Emergency Request
           </label>
         </div>
 

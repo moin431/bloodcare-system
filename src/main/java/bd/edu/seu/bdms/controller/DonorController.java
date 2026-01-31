@@ -1,6 +1,7 @@
 package bd.edu.seu.bdms.controller;
 
 import bd.edu.seu.bdms.model.DonationHistory;
+import bd.edu.seu.bdms.model.Donor;
 import bd.edu.seu.bdms.model.User;
 import bd.edu.seu.bdms.service.BloodStockService;
 import bd.edu.seu.bdms.service.DonationHistoryService;
@@ -10,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,10 +27,7 @@ public class DonorController {
     private final DonorService donorService;
     private final BloodStockService bloodStockService;
 
-    public DonorController(UserService userService,
-                           DonationHistoryService donationHistoryService,
-                           DonorService donorService,
-                           BloodStockService bloodStockService) {
+    public DonorController(UserService userService, DonationHistoryService donationHistoryService, DonorService donorService, BloodStockService bloodStockService) {
         this.userService = userService;
         this.donationHistoryService = donationHistoryService;
         this.donorService = donorService;
@@ -68,10 +67,6 @@ public class DonorController {
         return "donor/donor-dashboard";
     }
 
-    @GetMapping("/profile")
-    public String profile() {
-        return "donor/profile";
-    }
 
     @GetMapping("/donate-history")
     public String donateHistory(Model model) {
@@ -93,9 +88,34 @@ public class DonorController {
         String email = authentication.getName();
         User user = userService.findUserByEmail(email);
 
-        donorService.donate(user.getId(), user.getBloodGroup().toString());
-        bloodStockService.saveStock(user.getBloodGroup().toString(), 1);
+        user.setTotalDonations(user.getTotalDonations() + 1);
+
+        donorService.donate(user.getId(), user.getBloodGroup().name());
+        bloodStockService.saveStock(user.getBloodGroup().name(), 1);
+
+        userService.updateUser(user); // updates badge also
 
         return "redirect:/donor/dashboard?donated=true";
+    }
+    @GetMapping("/profile")
+    public String profile(Model model, Authentication auth){
+
+        User user = userService.findUserByEmail(auth.getName());
+        if(user == null){
+            return "redirect:/login";
+        }
+
+        model.addAttribute("user", user);
+
+        return "donor/profile";
+    }
+
+
+    @PostMapping("/profile/update")
+    public String updateProfile(@ModelAttribute User user){
+
+        userService.updateUser(user);
+
+        return "redirect:/donor/profile?updated=true";
     }
 }

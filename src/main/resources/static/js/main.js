@@ -115,3 +115,23 @@ if(params.get("donated") === "true"){
     // Remove donated=true from URL (so refresh won't show again)
     window.history.replaceState({}, document.title, window.location.pathname);
 }
+document.addEventListener("DOMContentLoaded", () => {
+
+    setTimeout(() => {
+
+        document.getElementById("loadingRow")?.classList.add("d-none");
+
+        let donorCount = document.getElementById("donorCount").value;
+
+        if (donorCount == 0) {
+            document.getElementById("emptyBox")?.classList.remove("d-none");
+        } else {
+            document.getElementById("donorRow")?.classList.remove("d-none");
+        }
+
+    }, 1200);
+
+});
+function goBack(){
+    window.history.back();
+}

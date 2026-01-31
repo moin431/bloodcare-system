@@ -43,4 +43,35 @@ public class DonorService {
         return donorRepositry.findAll();
     }
 
+    public long getTotalDonors() {
+        return  donorRepositry.count();
+    }
+
+    public List<Donor> getMatchedDonors(String bloodGroup,String city) {
+        return donorRepositry.findByBloodGroupAndCityAndEligibleTrue(bloodGroup,city);
+    }
+    public String calculateBadge(int donations) {
+
+        if(donations >= 10) return "PLATINUM HERO";
+        else if(donations >= 6) return "GOLD DONOR";
+        else if(donations >= 3) return "SILVER DONOR";
+        else if(donations >= 1) return "BRONZE DONOR";
+
+        return "NEW DONOR";
+    }
+    public void updateDonation(Donor donor){
+
+        int newCount = donor.getTotalDonations() + 1;
+        donor.setTotalDonations(newCount);
+
+        String badge = calculateBadge(newCount);
+        donor.setBadge(badge);
+
+        donorRepositry.save(donor);
+    }
+    public Donor getDonorByUserId(String userId){
+        return donorRepositry.findByUserId(userId);
+    }
+
+
 }

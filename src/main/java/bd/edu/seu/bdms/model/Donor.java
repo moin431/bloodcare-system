@@ -16,7 +16,11 @@ public class Donor {
     @Id
     private String id;
     private String userId;
+    private String name;
     private String bloodGroup;
+    private String city;
     private boolean eligible;
     private LocalDate lastDonationDate;
+    private int totalDonations;
+    private String badge;
 }

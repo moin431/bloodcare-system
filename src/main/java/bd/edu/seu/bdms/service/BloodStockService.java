@@ -39,4 +39,8 @@ public class BloodStockService {
                 .mapToInt(BloodStock::getUnits)
                 .sum();
     }
+
+    public long getTotalBloodUnits() {
+        return bloodStockRepository.count();
+    }
 }

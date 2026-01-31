@@ -30,10 +30,7 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String home(){
-        return "home";
-    }
+
     @GetMapping("admin-dashboard")
     public String adminDashboard(Model model){
         List<BloodRequest> bloodRequestList = bloodReqService.getAllRequests();

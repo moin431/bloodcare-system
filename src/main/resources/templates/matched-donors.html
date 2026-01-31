@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Matched Donors | BloodCare</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background:#f6f8fb;
+        }
+
+        .page-title{
+            font-weight:700;
+            margin-bottom:30px;
+        }
+
+        .donor-card{
+            background:white;
+            border-radius:16px;
+            padding:20px;
+            box-shadow:0 8px 25px rgba(0,0,0,0.08);
+            transition:.3s;
+            animation:fadeUp .6s ease forwards;
+            opacity:0;
+        }
+
+        .donor-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .blood-badge{
+            background:#e63946;
+            color:white;
+            padding:6px 14px;
+            border-radius:20px;
+            font-weight:600;
+            font-size:14px;
+        }
+
+        .city{
+            color:#666;
+            font-size:14px;
+        }
+
+        .call-btn{
+            background:#e63946;
+            color:white;
+            border:none;
+            padding:10px 18px;
+            border-radius:10px;
+            transition:.3s;
+        }
+
+        .call-btn:hover{
+            background:#c1121f;
+        }
+
+        .empty-box{
+            text-align:center;
+            padding:80px;
+            font-size:20px;
+            color:#888;
+        }
+
+        @keyframes fadeUp{
+            from{
+                transform:translateY(40px);
+                opacity:0;
+            }
+            to{
+                transform:translateY(0);
+                opacity:1;
+            }
+        }
+
+        /* skeleton loading */
+        .skeleton{
+            background:linear-gradient(90deg,#eee 25%,#ddd 37%,#eee 63%);
+            background-size:400% 100%;
+            animation:shimmer 1.4s ease infinite;
+            height:140px;
+            border-radius:16px;
+        }
+
+        @keyframes shimmer{
+            0%{background-position:100% 0}
+            100%{background-position:-100% 0}
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+
+    <input type="hidden" id="donorCount" th:value="${donors.size()}">
+
+    <!-- LOADING -->
+    <div id="loadingRow" class="row g-4">
+        <div class="col-md-4"><div class="skeleton"></div></div>
+        <div class="col-md-4"><div class="skeleton"></div></div>
+        <div class="col-md-4"><div class="skeleton"></div></div>
+    </div>
+
+    <!-- DONORS -->
+    <div id="donorRow" class="row g-4 d-none">
+
+        <div class="col-md-4" th:each="donor,stat : ${donors}">
+            <div class="donor-card" th:style="'animation-delay:' + ${stat.index * 0.15} + 's'">
+
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 th:text="${donor.name}"></h5>
+                    <span class="blood-badge" th:text="${donor.bloodGroup}"></span>
+                </div>
+
+                <p class="city">📍 <span th:text="${donor.city}"></span></p>
+
+                <button class="call-btn mt-2">
+                    Contact Donor
+                </button>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- EMPTY -->
+    <div id="emptyBox" class="empty-box d-none">
+        😔 No donors available right now
+    </div>
+    <button class="btn btn-secondary mb-3" onclick="goBack()">
+        ← Back
+    </button>
+
+</div>
+
+
+<script src="/js/main.js">
+</script>
+
+
+</body>
+</html>

@@ -16,9 +16,12 @@ public class User {
     private String UserId;
     private String name;
     private String email;
+    private String city;
     private String phoneNumber;
     private BooldGroup bloodGroup;
     private String password;
     private Role role;
     private String status;
+    private int totalDonations;
+    private String badge;
 }

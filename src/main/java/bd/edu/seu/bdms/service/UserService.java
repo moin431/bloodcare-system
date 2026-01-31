@@ -51,4 +51,26 @@ public class UserService {
     public List<User> findAllDonors(){
         return userRepository.findByRole("DONOR");
     }
+
+    public void assignBadge(User user){
+
+        int donations = user.getTotalDonations();
+
+        if(donations >= 20){
+            user.setBadge("GOLD");
+        }
+        else if(donations >= 10){
+            user.setBadge("SILVER");
+        }
+        else{
+            user.setBadge("BRONZE");
+        }
+    }
+
+
+    public void updateUser(User user) {
+        assignBadge(user);
+
+        userRepository.save(user);
+    }
 }

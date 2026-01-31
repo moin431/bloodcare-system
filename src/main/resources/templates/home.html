@@ -17,14 +17,14 @@
             <span class="ms-2 fw-bold text-danger logo-text">BloodCare</span>
         </a>
         <div>
-            <a href="login.html" class="btn btn-outline-danger me-2">Login</a>
-            <a href="#" class="btn btn-main">Donate</a>
+            <a href="/login" class="btn btn-main me-2">Login</a>
+            <a href="/registration" class="btn btn-main">Donate</a>
         </div>
     </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero pt-5">
+<section class="hero">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 fade-up">
@@ -45,36 +45,41 @@
         </div>
     </div>
 </section>
-
 <!-- STATS -->
 <section class="container py-5">
     <div class="row g-4">
-        <div class="col-md-3 fade-up">
+
+        <div class="col-md-3">
             <div class="stat-card">
-                <h2 class="count" data-target="1250"></h2>
+                <h2 th:text="${totalDonors}"></h2>
                 <p>Registered Donors</p>
             </div>
         </div>
-        <div class="col-md-3 fade-up">
+
+        <div class="col-md-3">
             <div class="stat-card">
-                <h2 class="count" data-target="860"></h2>
+                <h2 th:text="${totalUnits}"></h2>
                 <p>Blood Units</p>
             </div>
         </div>
-        <div class="col-md-3 fade-up">
+
+        <div class="col-md-3">
             <div class="stat-card">
-                <h2 class="count" data-target="420"></h2>
+                <h2 th:text="${livesSaved}"></h2>
                 <p>Lives Saved</p>
             </div>
         </div>
-        <div class="col-md-3 fade-up">
+
+        <div class="col-md-3">
             <div class="stat-card">
-                <h2 class="count" data-target="18"></h2>
+                <h2 th:text="${hospitals}"></h2>
                 <p>Hospitals</p>
             </div>
         </div>
+
     </div>
 </section>
+
 
 <!-- WHY -->
 <section class="container py-5">
