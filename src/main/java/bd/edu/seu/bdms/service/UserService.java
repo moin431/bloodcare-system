@@ -4,6 +4,7 @@ import bd.edu.seu.bdms.model.User;
 import bd.edu.seu.bdms.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,4 +74,26 @@ public class UserService {
 
         userRepository.save(user);
     }
+    public String getOtherUserId(String[] ids, String currentEmail){
+
+        User current = findUserByEmail(currentEmail);
+
+        String myId = current.getId();
+
+        if(ids.length != 2){
+            throw new RuntimeException("Invalid room format: " + Arrays.toString(ids));
+        }
+
+        if(ids[0].equals(myId)){
+            return ids[1];
+        } else {
+            return ids[0];
+        }
+    }
+    public User findOptionalById(String id){
+        return userRepository.findById(id).orElse(null);
+    }
+
+
+
 }

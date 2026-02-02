@@ -23,6 +23,10 @@ public class BloodReqService {
     public List<BloodRequest> getAllRequests(){
         return bloodReqRepository.findAll();
     }
+    public List<BloodRequest> getRequestsByUser(String userId){
+        return bloodReqRepository.findByUserId(userId);
+    }
+
 
     public long countRequests(){
         return bloodReqRepository.count();

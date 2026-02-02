@@ -106,22 +106,21 @@
     <!-- DONORS -->
     <div id="donorRow" class="row g-4 d-none">
 
-        <div class="col-md-4" th:each="donor,stat : ${donors}">
-            <div class="donor-card" th:style="'animation-delay:' + ${stat.index * 0.15} + 's'">
+        <div class="donor-card" th:each="donor : ${donors}">
 
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h5 th:text="${donor.name}"></h5>
-                    <span class="blood-badge" th:text="${donor.bloodGroup}"></span>
-                </div>
+            <h4 th:text="${donor.name}">Donor Name</h4>
 
-                <p class="city">📍 <span th:text="${donor.city}"></span></p>
+            <span class="badge" th:text="${donor.bloodGroup}"></span>
 
-                <button class="call-btn mt-2">
-                    Contact Donor
-                </button>
+            <p>📍 <span th:text="${donor.city}"></span></p>
+            <a th:href="@{'/chat/start/' + ${donor.id}}" class="btn btn-success">
+                💬 Chat Now
+            </a>
 
-            </div>
+
         </div>
+
+    </div>
 
 
 

@@ -3,17 +3,11 @@ package bd.edu.seu.bdms.controller;
 import bd.edu.seu.bdms.model.DonationHistory;
 import bd.edu.seu.bdms.model.Donor;
 import bd.edu.seu.bdms.model.User;
-import bd.edu.seu.bdms.service.BloodStockService;
-import bd.edu.seu.bdms.service.DonationHistoryService;
-import bd.edu.seu.bdms.service.DonorService;
-import bd.edu.seu.bdms.service.UserService;
+import bd.edu.seu.bdms.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,12 +20,14 @@ public class DonorController {
     private final DonationHistoryService donationHistoryService;
     private final DonorService donorService;
     private final BloodStockService bloodStockService;
+    private final ChatMessageService chatMessageService;
 
-    public DonorController(UserService userService, DonationHistoryService donationHistoryService, DonorService donorService, BloodStockService bloodStockService) {
+    public DonorController(UserService userService, DonationHistoryService donationHistoryService, DonorService donorService, BloodStockService bloodStockService, ChatMessageService chatMessageService) {
         this.userService = userService;
         this.donationHistoryService = donationHistoryService;
         this.donorService = donorService;
         this.bloodStockService = bloodStockService;
+        this.chatMessageService = chatMessageService;
     }
 
     @GetMapping("/dashboard")
@@ -66,6 +62,8 @@ public class DonorController {
 
         return "donor/donor-dashboard";
     }
+
+
 
 
     @GetMapping("/donate-history")
@@ -118,4 +116,5 @@ public class DonorController {
 
         return "redirect:/donor/profile?updated=true";
     }
+
 }

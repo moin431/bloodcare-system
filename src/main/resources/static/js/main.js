@@ -135,3 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function goBack(){
     window.history.back();
 }
+window.onload = ()=>{
+    let box = document.getElementById("chatBox");
+    box.scrollTop = box.scrollHeight;
+}

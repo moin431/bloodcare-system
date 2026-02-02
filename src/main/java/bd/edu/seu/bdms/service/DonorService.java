@@ -72,6 +72,19 @@ public class DonorService {
     public Donor getDonorByUserId(String userId){
         return donorRepositry.findByUserId(userId);
     }
+    public List<Donor> getMatchedDonors(String group, String location, boolean emergency){
+
+        if(emergency){
+            return donorRepositry.findByBloodGroupAndEligibleTrue(group);
+        }
+
+        return donorRepositry.findByBloodGroupAndCityAndEligibleTrue(
+                group, location
+        );
+    }
 
 
+    public Donor findById(String donorId) {
+        return donorRepositry.findById(donorId).orElse(null);
+    }
 }

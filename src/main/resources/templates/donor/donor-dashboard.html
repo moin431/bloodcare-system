@@ -38,6 +38,11 @@
         <a href="/donor/profile">My Profile</a>
         <a href="/donor/donate-history">Donate History</a>
         <a href="/donor/availability">Availability Status</a>
+        <a href="/my-chats">
+            💬 My Chats
+            <span th:if="${unreadCount > 0}" th:text="${unreadCount}"></span>
+        </a>
+
         <a href="/logout" class="mt-4 text-white border white">Logout</a>
     </div>
 

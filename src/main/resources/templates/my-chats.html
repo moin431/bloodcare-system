@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Chats</title>
+
+    <style>
+        .chat-item{
+            padding:15px;
+            border-bottom:1px solid #ddd;
+            display:flex;
+            justify-content:space-between;
+            cursor:pointer;
+            text-decoration:none;
+            color:black;
+        }
+        .badge{
+            background:red;
+            color:white;
+            padding:4px 8px;
+            border-radius:50%;
+        }
+    </style>
+</head>
+<body>
+
+<div th:if="${#lists.isEmpty(inbox)}">
+    No chats yet
+</div>
+
+<div th:each="chat : ${inbox}">
+
+    <a class="chat-item"
+       th:href="@{/chat/{room}(room=${chat.roomId})}">
+        <span th:text="${chat.otherName}"></span>
+        <span th:if="${chat.unread > 0}"
+              class="badge"
+              th:text="${chat.unread}">
+        </span>
+
+    </a>
+
+</div>
+
+</body>
+</html>
